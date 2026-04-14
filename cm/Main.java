@@ -37,8 +37,8 @@ public class Main {
             System.out.println("1. Display Students");
             System.out.println("2. Display Books");
             System.out.println("3. Display Borrowings");
-            System.out.println("4. Sort by Fines (Insertion Sort)");
-            System.out.println("5. Search by Student ID (Binary Search)");
+            System.out.println("4. Sort by Fines");
+            System.out.println("5. Search by Student ID");
             System.out.println("0. Exit");
             System.out.print("Select: ");
             choice = sc.nextInt();
