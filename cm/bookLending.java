@@ -1,6 +1,6 @@
 package cm;
 
-public class bookLending {
+public class BookLending {
     Student sdt;
     Book book;
     int loanPeriod;
@@ -8,7 +8,7 @@ public class bookLending {
     int overdue;
     int fine;
 
-    public bookLending(Student sdt, Book book, int loanPeriod) { // konstruktor sekaligus menghitung denda secara otomatis
+    public BookLending(Student sdt, Book book, int loanPeriod) { // konstruktor sekaligus menghitung denda secara otomatis
         this.sdt = sdt;
         this.book = book;
         this.loanPeriod = loanPeriod;

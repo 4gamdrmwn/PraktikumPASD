@@ -8,26 +8,26 @@ public class Main {
 
         // inisialisasi data mahasiswa
         Student[] students = {
-            new Student("22001", "Andi", "Teknik Informatika"),
-            new Student("22002", "Budi", "Teknik Informatika"),
-            new Student("22003", "Citra", "Sistem Informasi Bisnis")
+            new Student("22001", "Andi", "Teknik Informatika", "08134566789"),
+            new Student("22002", "Budi", "Teknik Informatika", "0821325123"),
+            new Student("22003", "Citra", "Sistem Informasi Bisnis", "08241252354")
         };
 
         // inisialisasi data buku
         Book[] books = {
-            new Book("B001", "Algoritma", 2020),
-            new Book("B002", "Basis Data", 2019),
-            new Book("B003", "Pemrograman", 2021),
-            new Book("B004", "Fisika", 2024)
+            new Book("B001", "Algoritma", 2020, "Singkong"),
+            new Book("B002", "Basis Data", 2019, "Asik"),
+            new Book("B003", "Pemrograman", 2021, "Usang"),
+            new Book("B004", "Fisika", 2024, "Nakasdasd")
         };
 
         // inisialisasi data peminjaman (array of objects)
-        bookLending[] loans = {
-            new bookLending(students[0], books[0], 7),
-            new bookLending(students[1], books[1], 3),
-            new bookLending(students[2], books[2], 10),
-            new bookLending(students[2], books[3], 6),
-            new bookLending(students[0], books[1], 4)
+        BookLending[] loans = {
+            new BookLending(students[0], books[0], 7),
+            new BookLending(students[1], books[1], 3),
+            new BookLending(students[2], books[2], 10),
+            new BookLending(students[2], books[3], 6),
+            new BookLending(students[0], books[1], 4)
         };
 
         int choice;
@@ -55,11 +55,11 @@ public class Main {
                     break;
                 case 3: // display data
                     System.out.println("\nLoan Data:");
-                    for (bookLending l : loans) l.printLending();
+                    for (BookLending l : loans) l.printLending();
                     break;
                 case 4: // sorting denda terbesar menggunakan Insertion Sort
                     for (int i = 1; i < loans.length; i++) {
-                        bookLending key = loans[i];
+                        BookLending key = loans[i];
                         int j = i - 1;
                         while (j >= 0 && loans[j].fine < key.fine) {
                             loans[j + 1] = loans[j];
@@ -68,16 +68,33 @@ public class Main {
                         loans[j + 1] = key;
                     }
                     System.out.println("\nAfter sorting (Largest fine):");
-                    for (bookLending l : loans) l.printLending();
+                    for (BookLending l : loans) l.printLending();
+                    // add
+                    boolean[] hasOverdue = new boolean[students.length];
+                    for (BookLending l : loans) {
+                        if (l.overdue > 0) {
+                            for (int i = 0; i < students.length; i++) {
+                                if (students[i].nim.equals(l.sdt.nim)) {
+                                    hasOverdue[i] = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    int count = 1;
+                    for (boolean b : hasOverdue) {
+                        if (b) count++;
+                    }
+                    System.out.println("Number of students whose loan term exceeds 5 days: " + count);
                     break;
                     case 5: // searching NIM menggunakan binary search
                     System.out.print("\nEnter NIM: ");
                     String searchNim = sc.nextLine();
 
-                    bookLending[] sortedForSearch = loans.clone(); // COPY ARRAY AGAR DATA ASLI (Menu 3) TIDAK BERUBAH URUTANNYA
+                    BookLending[] sortedForSearch = loans.clone(); // COPY ARRAY AGAR DATA ASLI (Menu 3) TIDAK BERUBAH URUTANNYA
 
                     for (int i = 1; i < sortedForSearch.length; i++) { // sorting ascending data copy-an berdasarkan NIM dengan Insertion Sort
-                        bookLending key = sortedForSearch[i];
+                        BookLending key = sortedForSearch[i];
                         int j = i - 1;
                         while (j >= 0 && sortedForSearch[j].sdt.nim.compareTo(key.sdt.nim) > 0) {
                             sortedForSearch[j + 1] = sortedForSearch[j];
