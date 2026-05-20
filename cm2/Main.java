@@ -5,13 +5,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        OrderQueue orderQueue = new OrderQueue();
+        BuyerQueue queueSystem = new BuyerQueue();
+        OrderList orderSystem = new OrderList();
         
         int currentQueueNum = 1;
 
-        orderQueue.enqueue(currentQueueNum++, new Buyer("Ainra", "08224500000"));
-        orderQueue.enqueue(currentQueueNum++, new Buyer("Danra", "08224511111"));
-        orderQueue.enqueue(currentQueueNum++, new Buyer("Sanri", "08224522222"));
+        // Memasukkan data awal langsung via constructor sesuai instruksi note jobsheet
+        queueSystem.enqueue(currentQueueNum++, new Buyer("Ainra", "08224500000"));
+        queueSystem.enqueue(currentQueueNum++, new Buyer("Danra", "08224511111"));
+        queueSystem.enqueue(currentQueueNum++, new Buyer("Sanri", "08224522222"));
 
         while (true) {
             System.out.println("=========================================");
@@ -32,20 +34,20 @@ public class Main {
                 System.out.print("No HP      : ");
                 String phone = sc.nextLine();
                 
-                orderQueue.enqueue(currentQueueNum, new Buyer(name, phone));
+                queueSystem.enqueue(currentQueueNum, new Buyer(name, phone));
                 System.out.println("Antrian berhasil ditambahkan dengan nomor: " + currentQueueNum);
                 currentQueueNum++;
                 System.out.println();
 
             } else if (menu == 2) {
-                if (orderQueue.size == 0) {
+                if (queueSystem.size == 0) {
                     System.out.println("Antrian kosong.\n");
                 } else {
-                    orderQueue.printQueue();
+                    queueSystem.printQueue();
                 }
 
             } else if (menu == 3) {
-                QueueNode served = orderQueue.dequeue();
+                QueueNode served = queueSystem.dequeue();
                 if (served == null) {
                     System.out.println("Tidak ada antrian yang bisa diproses.\n");
                 } else {
@@ -58,16 +60,16 @@ public class Main {
                     int price = sc.nextInt();
                     sc.nextLine();
 
-                    orderQueue.addOrder(new Order(code, orderName, price));
+                    orderSystem.addOrder(new Order(code, orderName, price));
                     System.out.println(served.buyer.Name + " telah memesan " + orderName);
                     System.out.println();
                 }
 
             } else if (menu == 4) {
-                if (orderQueue.orderHead == null) {
+                if (orderSystem.head == null) {
                     System.out.println("Belum ada data pesanan.\n");
                 } else {
-                    orderQueue.printReport();
+                    orderSystem.printReport();
                 }
 
             } else if (menu == 0) {
