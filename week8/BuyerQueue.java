@@ -1,4 +1,4 @@
-package cm2;
+package week8;
 
 public class BuyerQueue {
     QueueNode head;
@@ -45,4 +45,43 @@ public class BuyerQueue {
         }
         System.out.println();
     }
+    public QueueNode removeByQueueNumber(int queueNumber) {
+        if (head == null) {
+        return null;
+        }
+        QueueNode current = head;
+        while (current != null) {
+        if (current.queueNumber == queueNumber) {
+            // if node pertama
+            if (current == head) {
+                head = head.next;
+
+                if (head != null) {
+                    head.prev = null;
+                } else {
+                    tail = null;
+                }
+                }
+
+            // if node terakhir
+            else if (current == tail) {
+                tail = tail.prev;
+                tail.next = null;
+                }
+
+            // if di tengah
+            else {
+                current.prev.next = current.next;
+                current.next.prev = current.prev;
+                }
+
+            size--;
+            return current;
+            }
+
+        current = current.next;
+    }
+
+    return null;
+}
 }

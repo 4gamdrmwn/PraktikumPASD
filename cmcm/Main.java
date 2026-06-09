@@ -1,4 +1,4 @@
-package cm2;
+package cmcm;
 
 import java.util.Scanner;
 
@@ -47,9 +47,16 @@ public class Main {
                 }
 
             } else if (menu == 3) {
-                QueueNode served = queueSystem.dequeue();
-                if (served == null) {
+                if (queueSystem.size == 0) {
                     System.out.println("Tidak ada antrian yang bisa diproses.\n");
+                } else {
+                    System.out.print("Masukkan nomor antrian yang diproses : ");
+                    int nomor = sc.nextInt();
+                    sc.nextLine();
+                    QueueNode served = queueSystem.removeByQueueNumber(nomor);
+
+                if (served == null) {
+                    System.out.println("Nomor antrian tidak ditemukan.\n");
                 } else {
                     System.out.print("Order Code : ");
                     int code = sc.nextInt();
@@ -63,8 +70,8 @@ public class Main {
                     orderSystem.addOrder(new Order(code, orderName, price));
                     System.out.println(served.buyer.Name + " telah memesan " + orderName);
                     System.out.println();
-                }
-
+                    }
+                  }
             } else if (menu == 4) {
                 if (orderSystem.head == null) {
                     System.out.println("Belum ada data pesanan.\n");

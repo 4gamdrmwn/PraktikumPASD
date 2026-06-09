@@ -1,4 +1,4 @@
-package cm2;
+package cmcm;
 
 class Order {
     int OrderCode;
@@ -78,6 +78,17 @@ public class OrderList {
                 current.order.price);
             current = current.next;
         }
-        System.out.println();
+            System.out.println("========================================");
+            System.out.println("Total Price : " + getTotalPrice());
+            System.out.println();
     }
+        public int getTotalPrice() {
+            int total = 0;
+            OrderNode current = head;
+            while (current != null) {
+                total += current.order.price;
+                current = current.next;
+            }
+            return total;
+        }
 }

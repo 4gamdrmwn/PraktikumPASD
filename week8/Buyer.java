@@ -1,4 +1,4 @@
-package cm2;
+package week8;
 
 public class Buyer {
     String Name;
